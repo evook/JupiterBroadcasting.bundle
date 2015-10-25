@@ -175,7 +175,7 @@ def getShowEpisodes(show):
     # http://pythonhosted.org/feedparser/
     return RSS.FeedFromURL(show['feed'])
 
-def createEpisodeObject(url, title, summary, thumb, rating_key, originally_available_at=None, duration=None, show_name=None, include_container=False):
+def createEpisodeObject(url, title, summary, thumb, rating_key, originally_available_at=None, duration=None, show_name=None, include_container=False, includeRelated=False, includeRelatedCount=False):
     container = Container.MP4
     video_codec = VideoCodec.H264
     audio_codec = AudioCodec.AAC
@@ -222,6 +222,7 @@ def createEpisodeObject(url, title, summary, thumb, rating_key, originally_avail
         return track_object
 
 @indirect
+@route('/video/jupiterbroadcasting/PlayVideo')
 def PlayVideo(url):
     return IndirectResponse(VideoClipObject, key=url)
     # return IndirectResponse(VideoClipObject, key=getFinalUrl(url))
